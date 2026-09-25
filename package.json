@@ -1,0 +1,21 @@
+{
+  "name": "baft-admin",
+  "version": "0.1.0",
+  "private": true,
+  "description": "BAFT Admin platform monorepo (Admin API + Admin Web)",
+  "workspaces": [
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev:api": "npm run dev --workspace apps/api",
+    "dev:web": "npm run dev --workspace apps/web",
+    "build": "npm run build --workspace apps/api && npm run build --workspace apps/web",
+    "test": "npm run test --workspace apps/api && npm run test --workspace apps/web",
+    "typecheck": "npm run typecheck --workspace apps/api && npm run typecheck --workspace apps/web",
+    "lint": "npm run lint --workspace apps/api && npm run lint --workspace apps/web",
+    "db:migrate": "npm run db:migrate --workspace apps/api"
+  }
+}
