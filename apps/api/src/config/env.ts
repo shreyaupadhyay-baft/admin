@@ -9,6 +9,18 @@ const envSchema = z.object({
   LOG_LEVEL: z.enum(["error", "warn", "info", "http", "debug"]).default("info"),
   CORS_ALLOWED_ORIGINS: z.string().min(1, "CORS_ALLOWED_ORIGINS is required"),
 
+  // ── Admin auth session policy ──────────────────────────────────────────
+  ACCESS_TOKEN_TTL_MINUTES: z.coerce.number().int().positive().default(15),
+  REFRESH_TOKEN_TTL_DAYS: z.coerce.number().int().positive().default(7),
+  LOGIN_RATE_LIMIT_MAX_ATTEMPTS: z.coerce.number().int().positive().default(10),
+  LOGIN_RATE_LIMIT_WINDOW_MINUTES: z.coerce.number().int().positive().default(15),
+
+  // Used only by the db:seed:admin script to bootstrap the first Super Admin.
+  // Never used by the running API itself.
+  BOOTSTRAP_ADMIN_EMAIL: z.string().optional(),
+  BOOTSTRAP_ADMIN_PASSWORD: z.string().optional(),
+  BOOTSTRAP_ADMIN_FULL_NAME: z.string().optional(),
+
   // Transcorp integration: intentionally optional at Phase 0. The domain
   // services that call TranscorpIntegrationService do not exist yet; when
   // they land, that service must fail closed if these are unset outside dev.

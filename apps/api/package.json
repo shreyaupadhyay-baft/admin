@@ -13,7 +13,8 @@
     "test:coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit",
     "lint": "echo \"lint: TBD - eslint config not yet decided\"",
-    "db:migrate": "tsx src/infrastructure/database/run-migrations.ts"
+    "db:migrate": "tsx src/infrastructure/database/run-migrations.ts",
+    "db:seed:admin": "tsx src/infrastructure/database/seed-bootstrap-admin.ts"
   },
   "dependencies": {
     "compression": "^1.8.1",

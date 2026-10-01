@@ -1,9 +1,61 @@
 import { Router } from "express";
 import { healthRouter } from "./health.routes.js";
+import { authRouter } from "./auth.routes.js";
+import { adminRouter } from "./admin.routes.js";
+import { roleRouter } from "./role.routes.js";
+import { permissionRouter } from "./permission.routes.js";
+import { auditLogRouter } from "./auditLog.routes.js";
+import { userRouter } from "./user.routes.js";
+import { deviceRouter } from "./device.routes.js";
+import { supportCaseRouter } from "./supportCase.routes.js";
+import { appIssueRouter } from "./appIssue.routes.js";
+import { campaignRouter } from "./campaign.routes.js";
+import { rewardRouter } from "./reward.routes.js";
+import { riskSignalRouter } from "./riskSignal.routes.js";
+import { riskCaseRouter } from "./riskCase.routes.js";
+import { securityEventRouter } from "./securityEvent.routes.js";
+import { securityCaseRouter } from "./securityCase.routes.js";
+import { securityActionRouter } from "./securityAction.routes.js";
+import { securityUserRouter } from "./securityUser.routes.js";
+import { securityPostureRouter } from "./securityPosture.routes.js";
+import { administrationAdminRouter } from "./administrationAdmin.routes.js";
+import { administrationRoleRouter } from "./administrationRole.routes.js";
+import { administrationPermissionRouter } from "./administrationPermission.routes.js";
+import { administrationAuditRouter } from "./administrationAudit.routes.js";
+import { approvalRouter } from "./approval.routes.js";
+import { notificationRouter } from "./notification.routes.js";
+import { searchRouter } from "./search.routes.js";
+import { dashboardRouter } from "./dashboard.routes.js";
 
 export const v1Router = Router();
 
 v1Router.use("/health", healthRouter);
+v1Router.use("/auth", authRouter);
+v1Router.use("/admins", adminRouter);
+v1Router.use("/roles", roleRouter);
+v1Router.use("/permissions", permissionRouter);
+v1Router.use("/audit-logs", auditLogRouter);
+v1Router.use("/users", userRouter);
+v1Router.use("/devices", deviceRouter);
+v1Router.use("/support/cases", supportCaseRouter);
+v1Router.use("/support/app-issues", appIssueRouter);
+v1Router.use("/campaigns", campaignRouter);
+v1Router.use("/rewards", rewardRouter);
+v1Router.use("/risk/signals", riskSignalRouter);
+v1Router.use("/risk/cases", riskCaseRouter);
+v1Router.use("/security/events", securityEventRouter);
+v1Router.use("/security/cases", securityCaseRouter);
+v1Router.use("/security/actions", securityActionRouter);
+v1Router.use("/security/users", securityUserRouter);
+v1Router.use("/security/posture", securityPostureRouter);
+v1Router.use("/administration/admins", administrationAdminRouter);
+v1Router.use("/administration/roles", administrationRoleRouter);
+v1Router.use("/administration/permissions", administrationPermissionRouter);
+v1Router.use("/administration/audit", administrationAuditRouter);
+v1Router.use("/approvals", approvalRouter);
+v1Router.use("/notifications", notificationRouter);
+v1Router.use("/search", searchRouter);
+v1Router.use("/dashboard", dashboardRouter);
 
-// Domain routers (users, risk, admin-management, transcorp, engineering, ...)
-// are added here in later phases — none exist yet by design.
+// Domain routers (transcorp, engineering, ...) are added here in later
+// phases — none exist yet by design.
