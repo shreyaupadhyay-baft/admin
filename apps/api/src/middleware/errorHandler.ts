@@ -13,6 +13,20 @@ export const errorHandler = (err: unknown, req: Request, res: Response, _next: N
     return;
   }
 
+  // body-parser failures (malformed JSON, oversized body) are client errors, not server faults.
+  const bodyParserError = err as { type?: unknown; status?: unknown } | null;
+  if (typeof bodyParserError?.type === "string" && bodyParserError.type.startsWith("entity.")) {
+    const tooLarge = bodyParserError.type === "entity.too.large";
+    sendError(
+      res,
+      req.requestId,
+      tooLarge ? 413 : 400,
+      tooLarge ? "PAYLOAD_TOO_LARGE" : "INVALID_REQUEST_BODY",
+      tooLarge ? "Request body is too large." : "Request body is malformed.",
+    );
+    return;
+  }
+
   logWithContext("error", "unhandled_error", {
     requestId: req.requestId,
     correlationId: req.correlationId,

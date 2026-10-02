@@ -26,6 +26,8 @@ import { approvalRouter } from "./approval.routes.js";
 import { notificationRouter } from "./notification.routes.js";
 import { searchRouter } from "./search.routes.js";
 import { dashboardRouter } from "./dashboard.routes.js";
+import { kycRouter } from "./kyc.routes.js";
+import { transcorpSystemRouter, transcorpWebhookRouter } from "./transcorpIntegration.routes.js";
 
 export const v1Router = Router();
 
@@ -56,6 +58,9 @@ v1Router.use("/approvals", approvalRouter);
 v1Router.use("/notifications", notificationRouter);
 v1Router.use("/search", searchRouter);
 v1Router.use("/dashboard", dashboardRouter);
+v1Router.use("/kyc", kycRouter);
+v1Router.use("/system/integrations/transcorp", transcorpSystemRouter);
+v1Router.use("/integrations/transcorp", transcorpWebhookRouter);
 
-// Domain routers (transcorp, engineering, ...) are added here in later
-// phases — none exist yet by design.
+// Transcorp business routers (kyc, transactions, ...) are added here in later
+// phases — only the integration foundation (health + webhook boundary) exists.

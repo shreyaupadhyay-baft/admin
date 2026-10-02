@@ -124,6 +124,14 @@ export const PERMISSIONS = {
   NOTIFICATIONS_READ: "notifications.read",
   NOTIFICATIONS_MARK_READ: "notifications.mark_read",
   NOTIFICATIONS_MARK_ALL_READ: "notifications.mark_all_read",
+
+  // Infrastructure visibility only (integration connectivity/config status).
+  // Deliberately NOT a "Transcorp admin" permission: provider data modules
+  // gate on their own permissions (kyc.read, transactions.read, ...).
+  SYSTEM_INTEGRATIONS_READ: "system.integrations.read",
+
+  // Provider-sourced (Transcorp) KYC status view. Read-only; distinct from users.read.
+  KYC_READ: "kyc.read",
 } as const;
 
 export type Permission = (typeof PERMISSIONS)[keyof typeof PERMISSIONS];

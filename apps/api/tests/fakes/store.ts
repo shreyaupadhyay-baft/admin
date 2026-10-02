@@ -514,6 +514,8 @@ export const seedRbacFixtures = () => {
     ["notifications", "read"],
     ["notifications", "mark_read"],
     ["notifications", "mark_all_read"],
+    ["system", "integrations.read"],
+    ["kyc", "read"],
   ];
 
   for (const [resource, action] of permissionDefs) {
@@ -567,6 +569,10 @@ export const seedRbacFixtures = () => {
   for (const role of [securityAdmin, auditor, operationsAdmin, supportAdmin, riskFraudAdmin, productGrowthAdmin, engineeringAdmin]) {
     grant(role, notificationKeys);
   }
+
+  grant(engineeringAdmin, ["system.integrations.read"]);
+  grant(supportAdmin, ["kyc.read"]);
+  grant(riskFraudAdmin, ["kyc.read"]);
 
   grant(securityAdmin, [
     "admins.read",

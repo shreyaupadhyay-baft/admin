@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ApiError } from "../api/client.js";
 import { fetchUserOverview, updateUser, updateUserStatus, type UserOverview, type UserStatus } from "../api/users.js";
+import { KycSection } from "../components/KycSection.js";
 import { useAuth } from "../context/AuthContext.js";
 
 export const UserDetailPage = () => {
@@ -165,6 +166,8 @@ export const UserDetailPage = () => {
           </table>
         )}
       </section>
+
+      <KycSection userId={id} canRead={can("kyc.read")} />
     </div>
   );
 };

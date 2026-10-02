@@ -111,6 +111,9 @@ export const AUDIT_ACTIONS = {
   APPROVAL_EXPIRED: "APPROVAL_EXPIRED",
   APPROVAL_EXECUTED: "APPROVAL_EXECUTED",
   APPROVAL_EXECUTION_FAILED: "APPROVAL_EXECUTION_FAILED",
+
+  // Read-audit of a provider-backed sensitive lookup. Metadata never holds KYC data.
+  KYC_VIEWED: "KYC_VIEWED",
 } as const;
 
 export type AuditAction = (typeof AUDIT_ACTIONS)[keyof typeof AUDIT_ACTIONS];
