@@ -114,6 +114,8 @@ export const AUDIT_ACTIONS = {
 
   // Read-audit of a provider-backed sensitive lookup. Metadata never holds KYC data.
   KYC_VIEWED: "KYC_VIEWED",
+  // Same convention for beneficiaries. Metadata never holds beneficiary data.
+  BENEFICIARY_VIEWED: "BENEFICIARY_VIEWED",
 } as const;
 
 export type AuditAction = (typeof AUDIT_ACTIONS)[keyof typeof AUDIT_ACTIONS];

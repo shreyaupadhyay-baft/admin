@@ -98,3 +98,21 @@ Information needed from Transcorp: endpoint + method; request identifier (and wh
 `users.external_ref`); auth/tenant headers for the KYC host; response schema incl. status vocabulary,
 timestamps, masked reference formats; whether a decline reason may be shown to admins; error
 semantics for "no KYC record"; rate limits; UAT credentials.
+
+## Beneficiary module (read-only) — contract still unverified
+`GET /api/v1/users/:id/beneficiaries` (permission `beneficiaries.read`; Super Admin, Support Admin, Risk/Fraud
+Admin) follows the KYC pattern exactly: BAFT user id in → provider identity from `users.external_ref`
+**server-side** → registered `BeneficiaryAdapter` through the Transcorp client → allow-list DTO
+(`status`, `displayName`, `beneficiaryType`, `maskedReference`, `addedAt`; no limits, no full account numbers,
+no provider ids) → `BENEFICIARY_VIEWED` audit row (outcome only). Nothing is cached or stored; no beneficiary
+table exists. States: `available`, `no_provider_relationship`, `not_found` (also an empty list),
+`not_configured`, `unverified` (the current production state: no adapter is registered).
+
+To finish: add `operations/beneficiary.ts` (`defineOperation`, kind `read`, zod response schema), an adapter in
+`beneficiary/` mapping the validated response to `NormalizedBeneficiary[]`, and register it. The DTO fields and
+status vocabulary in `beneficiary/types.ts` are BAFT-side placeholders to be reconciled with the contract.
+
+Information needed from Transcorp: endpoint + HTTP method; lookup identifier (and whether it equals
+`users.external_ref`); auth mechanism and tenant headers; request/response schemas; beneficiary status values;
+limit fields and semantics (currency, period, per-txn vs aggregate); not-found semantics (404 vs empty list);
+rate limits; which fields (name, account/reference masking format) admins may see; UAT credentials.

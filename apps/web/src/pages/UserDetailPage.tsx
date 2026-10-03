@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { ApiError } from "../api/client.js";
 import { fetchUserOverview, updateUser, updateUserStatus, type UserOverview, type UserStatus } from "../api/users.js";
 import { KycSection } from "../components/KycSection.js";
+import { BeneficiariesSection } from "../components/BeneficiariesSection.js";
 import { useAuth } from "../context/AuthContext.js";
 
 export const UserDetailPage = () => {
@@ -168,6 +169,8 @@ export const UserDetailPage = () => {
       </section>
 
       <KycSection userId={id} canRead={can("kyc.read")} />
+
+      <BeneficiariesSection userId={id} canRead={can("beneficiaries.read")} />
     </div>
   );
 };

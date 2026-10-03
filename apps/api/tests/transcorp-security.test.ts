@@ -144,6 +144,18 @@ describe("Transcorp security", () => {
       }
     });
 
+    it("no Beneficiary adapter is registered in production code until the Transcorp Beneficiary contract is verified", () => {
+      const registrations = files.filter((f) => /^\s*registerBeneficiaryAdapter\(/m.test(f.text));
+      expect(registrations.map((f) => f.path)).toEqual([]);
+    });
+
+    it("Beneficiary controller/service never build provider URLs or read provider ids from the request", () => {
+      for (const path of ["controllers/beneficiary.controller.ts", "services/beneficiary.service.ts"]) {
+        const text = files.find((f) => f.path === path)!.text;
+        expect(text, path).not.toMatch(/https?:\/\/|fetch\(|req\.(query|body)/);
+      }
+    });
+
     it("introduces no broad Transcorp permission", () => {
       const perms = files.find((f) => f.path === "constants/permissions.ts")!.text;
       expect(perms).not.toMatch(/transcorp\.(admin|\*|all|manage)/i);
