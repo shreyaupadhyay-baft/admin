@@ -132,6 +132,18 @@ export const PERMISSIONS = {
 
   // Provider-sourced (Transcorp) KYC status view. Read-only; distinct from users.read.
   KYC_READ: "kyc.read",
+
+  // Provider-sourced (Transcorp) beneficiary view for a BAFT user. Read-only; distinct from users.read.
+  BENEFICIARIES_READ: "beneficiaries.read",
+
+  // Analytics: BAFT-owned aggregates only. One read permission per section; financial is separate.
+  ANALYTICS_OVERVIEW_READ: "analytics.overview.read",
+  ANALYTICS_ONBOARDING_READ: "analytics.onboarding.read",
+  ANALYTICS_FEATURES_READ: "analytics.features.read",
+  ANALYTICS_RETENTION_READ: "analytics.retention.read",
+  ANALYTICS_USAGE_READ: "analytics.usage.read",
+  ANALYTICS_REWARDS_READ: "analytics.rewards.read",
+  ANALYTICS_FINANCIAL_READ: "analytics.financial.read",
 } as const;
 
 export type Permission = (typeof PERMISSIONS)[keyof typeof PERMISSIONS];

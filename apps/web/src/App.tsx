@@ -14,6 +14,7 @@ import { ApprovalsListPage } from "./pages/ApprovalsListPage.js";
 import { CampaignDetailPage } from "./pages/CampaignDetailPage.js";
 import { CampaignsListPage } from "./pages/CampaignsListPage.js";
 import { DashboardPage } from "./pages/DashboardPage.js";
+import { AnalyticsPage } from "./pages/AnalyticsPage.js";
 import { LoginPage } from "./pages/LoginPage.js";
 import { NotificationsListPage } from "./pages/NotificationsListPage.js";
 import { RewardDetailPage } from "./pages/RewardDetailPage.js";
@@ -51,6 +52,8 @@ const AppRoutes = () => {
     <Routes>
       <Route element={<AdminShellLayout />}>
         <Route path="/" element={<DashboardPage />} />
+        <Route path="/analytics" element={<AnalyticsPage />} />
+        <Route path="/analytics/:section" element={<AnalyticsPage />} />
         <Route path="/system-health" element={<SystemHealthPage />} />
         <Route path="/users" element={<UsersListPage />} />
         <Route path="/users/:id" element={<UserDetailPage />} />

@@ -27,6 +27,7 @@ import { notificationRouter } from "./notification.routes.js";
 import { searchRouter } from "./search.routes.js";
 import { dashboardRouter } from "./dashboard.routes.js";
 import { kycRouter } from "./kyc.routes.js";
+import { analyticsRouter } from "./analytics.routes.js";
 import { transcorpSystemRouter, transcorpWebhookRouter } from "./transcorpIntegration.routes.js";
 
 export const v1Router = Router();
@@ -59,6 +60,7 @@ v1Router.use("/notifications", notificationRouter);
 v1Router.use("/search", searchRouter);
 v1Router.use("/dashboard", dashboardRouter);
 v1Router.use("/kyc", kycRouter);
+v1Router.use("/analytics", analyticsRouter);
 v1Router.use("/system/integrations/transcorp", transcorpSystemRouter);
 v1Router.use("/integrations/transcorp", transcorpWebhookRouter);
 

@@ -4,6 +4,16 @@ import { useAuth } from "../context/AuthContext.js";
 import { fetchUnreadCount } from "../api/notifications.js";
 import { GlobalSearch } from "../components/GlobalSearch.js";
 
+const ANALYTICS_PERMISSIONS = [
+  "analytics.overview.read",
+  "analytics.onboarding.read",
+  "analytics.features.read",
+  "analytics.retention.read",
+  "analytics.usage.read",
+  "analytics.rewards.read",
+  "analytics.financial.read",
+];
+
 // No WebSocket/SSE infrastructure exists in this app, and adding one just for
 // a badge count would be disproportionate — a 30s poll while the shell is
 // mounted is a reasonable refresh strategy that fits the existing app.
@@ -86,6 +96,11 @@ export const AdminShellLayout = () => {
           <li>
             <Link to="/system-health">System Health</Link>
           </li>
+          {ANALYTICS_PERMISSIONS.some((p) => can(p)) && (
+            <li>
+              <Link to="/analytics">Analytics</Link>
+            </li>
+          )}
           {can("users.read") && (
             <li>
               <Link to="/users">Users</Link>

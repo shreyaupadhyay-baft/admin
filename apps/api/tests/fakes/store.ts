@@ -516,6 +516,14 @@ export const seedRbacFixtures = () => {
     ["notifications", "mark_all_read"],
     ["system", "integrations.read"],
     ["kyc", "read"],
+    ["beneficiaries", "read"],
+    ["analytics", "overview.read"],
+    ["analytics", "onboarding.read"],
+    ["analytics", "features.read"],
+    ["analytics", "retention.read"],
+    ["analytics", "usage.read"],
+    ["analytics", "rewards.read"],
+    ["analytics", "financial.read"],
   ];
 
   for (const [resource, action] of permissionDefs) {
@@ -573,6 +581,12 @@ export const seedRbacFixtures = () => {
   grant(engineeringAdmin, ["system.integrations.read"]);
   grant(supportAdmin, ["kyc.read"]);
   grant(riskFraudAdmin, ["kyc.read"]);
+  grant(supportAdmin, ["beneficiaries.read"]);
+  grant(riskFraudAdmin, ["beneficiaries.read"]);
+  // Mirrors 027_seed_analytics_permissions.sql
+  grant(productGrowthAdmin, ["analytics.overview.read", "analytics.onboarding.read", "analytics.features.read", "analytics.retention.read", "analytics.usage.read", "analytics.rewards.read"]);
+  grant(operationsAdmin, ["analytics.overview.read", "analytics.onboarding.read", "analytics.rewards.read"]);
+  grant(engineeringAdmin, ["analytics.usage.read"]);
 
   grant(securityAdmin, [
     "admins.read",
